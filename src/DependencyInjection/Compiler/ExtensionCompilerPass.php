@@ -11,10 +11,11 @@
 
 namespace Pitch\LiformBundle\DependencyInjection\Compiler;
 
+use Pitch\Liform\LiformInterface;
 use Pitch\Liform\Transformer\ExtensionInterface;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
@@ -28,13 +29,13 @@ class ExtensionCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('Limenius\Liform\Liform')) {
+        if (!$container->hasDefinition(LiformInterface::class)) {
             return;
         }
 
-        $liform = $container->getDefinition('Limenius\Liform\Liform');
+        $liform = $container->getDefinition(LiformInterface::class);
 
-        foreach ($container->findTaggedServiceIds(self::EXTENSION_TAG) as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds(self::EXTENSION_TAG) as $id => $tags) {
             $extension = $container->getDefinition($id);
 
             if (!isset(class_implements($extension->getClass())[ExtensionInterface::class])) {
@@ -46,7 +47,7 @@ class ExtensionCompilerPass implements CompilerPassInterface
                 ));
             }
 
-            $liform->addMethodCall('addExtension', [$extension]);
+            $liform->addMethodCall('addExtension', [new Reference($id)]);
         }
     }
 }
