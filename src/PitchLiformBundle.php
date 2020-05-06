@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\LiformBundle;
+namespace Pitch\LiformBundle;
 
-use Limenius\LiformBundle\DependencyInjection\Compiler\ExtensionCompilerPass;
-use Limenius\LiformBundle\DependencyInjection\Compiler\TransformerCompilerPass;
+use Pitch\LiformBundle\DependencyInjection\Compiler\ExtensionCompilerPass;
+use Pitch\LiformBundle\DependencyInjection\Compiler\TransformerCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
  */
-class LimeniusLiformBundle extends Bundle
+class PitchLiformBundle extends Bundle
 {
     /**
      * @inheritDoc

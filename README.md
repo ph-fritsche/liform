@@ -40,7 +40,7 @@ class AppKernel extends Kernel
         $bundles = array(
             // ...
 
-            new Limenius\LiformBundle\LimeniusLiformBundle(),
+            new Pitch\LiformBundle\PitchLiformBundle(),
         );
 
         // ...

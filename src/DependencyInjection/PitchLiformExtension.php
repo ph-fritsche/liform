@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\LiformBundle\DependencyInjection;
+namespace Pitch\LiformBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class LimeniusLiformExtension extends Extension
+class PitchLiformExtension extends Extension
 {
     /**
      * @inheritdoc

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\LiformBundle\DependencyInjection\Compiler;
+namespace Pitch\LiformBundle\DependencyInjection\Compiler;
 
 use Limenius\Liform\Transformer\TransformerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

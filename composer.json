@@ -1,5 +1,5 @@
 {
-    "name": "limenius/liform-bundle",
+    "name": "pitch/liform-bundle",
     "description": "Bundle for Liform: Transform Symfony Forms into Json Schema",
     "type": "symfony-bundle",
     "license": "MIT",
@@ -10,7 +10,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Limenius\\LiformBundle\\": "src/" }
+        "psr-4": { "Pitch\\LiformBundle\\": "src/" }
     },
     "require": {
         "limenius/liform": "^0.15.0",
