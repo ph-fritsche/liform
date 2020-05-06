@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Serializer\Normalizer;
+namespace Limenius\Liform\Serializer;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;

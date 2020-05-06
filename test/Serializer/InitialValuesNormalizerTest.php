@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Normalizer;
+namespace Limenius\Liform\Serializer;
 
 use Limenius\Liform\LiformTestCase;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

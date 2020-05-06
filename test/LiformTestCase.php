@@ -11,7 +11,7 @@
 
 namespace Limenius\Liform;
 
-use Limenius\Liform\Form\Extension\AddLiformExtension;
+use Limenius\Liform\Form\AddLiformExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Forms;

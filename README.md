@@ -120,7 +120,7 @@ $liform = new Liform($resolver);
 This library provides a normalizer to serialize a `FormView` (you can create one with `$form->createView()`) into an array of initial values.
 
 ```php
-use Limenius\Liform\Serializer\Normalizer\FormViewNormalizer;
+use Limenius\Liform\Serializer\FormViewNormalizer;
 
 $encoders = array(new XmlEncoder(), new JsonEncoder());
 $normalizers = array(new FormViewNormalizer());
@@ -138,7 +138,7 @@ To obtain an array of initial values that match your json-schema.
 This library provides a normalizer to serialize forms with errors into an array. This part was shamelessly taken from [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle/blob/master/Serializer/Normalizer/FormErrorNormalizer.php). To use this feature copy the following code in your controller action:
 
 ```php
-use Limenius\Liform\Serializer\Normalizer\FormErrorNormalizer;
+use Limenius\Liform\Serializer\FormErrorNormalizer;
 
 $encoders = array(new XmlEncoder(), new JsonEncoder());
 $normalizers = array(new FormErrorNormalizer());
