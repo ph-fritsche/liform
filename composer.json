@@ -10,7 +10,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Limenius\\LiformBundle\\": "" }
+        "psr-4": { "Limenius\\LiformBundle\\": "src/" }
     },
     "require": {
         "limenius/liform": "^0.15.0",
