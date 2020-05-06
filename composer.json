@@ -10,11 +10,13 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Limenius\\Liform\\": "src/Limenius/Liform" }
+        "psr-4": {
+            "Limenius\\Liform\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Limenius\\Liform\\Tests\\": "tests/Limenius/Liform/Tests"
+            "Limenius\\Liform\\Tests\\": "test/"
         }
     },
     "require": {
