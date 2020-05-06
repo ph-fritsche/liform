@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Tests;
+namespace Limenius\Liform;
 
 use Limenius\Liform\Form\Extension\AddLiformExtension;
 use PHPUnit\Framework\TestCase;

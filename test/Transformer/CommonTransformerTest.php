@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Tests\Liform\Transformer;
+namespace Limenius\Liform\Liform\Transformer;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Limenius\Liform\Transformer\CompoundTransformer;
 use Limenius\Liform\Transformer\StringTransformer;
 use Limenius\Liform\Resolver;
-use Limenius\Liform\Tests\LiformTestCase;
+use Limenius\Liform\LiformTestCase;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>

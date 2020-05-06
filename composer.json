@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Limenius\\Liform\\Tests\\": "test/"
+            "Limenius\\Liform\\": "test/"
         }
     },
     "require": {

@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Tests\Normalizer;
+namespace Limenius\Liform\Normalizer;
 
-use Limenius\Liform\Serializer\Normalizer\InitialValuesNormalizer;
-use Limenius\Liform\Tests\LiformTestCase;
+use Limenius\Liform\LiformTestCase;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

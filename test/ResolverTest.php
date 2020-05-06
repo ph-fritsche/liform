@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Tests;
+namespace Limenius\Liform;
 
 use Limenius\Liform\Resolver;
 use Limenius\Liform\Exception\TransformerException;
