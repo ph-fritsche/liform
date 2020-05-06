@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Liform\Transformer;
+namespace Pitch\Liform\Liform\Transformer;
 
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Limenius\Liform\Transformer\CompoundTransformer;
-use Limenius\Liform\Transformer\NumberTransformer;
-use Limenius\Liform\Resolver;
-use Limenius\Liform\LiformTestCase;
+use Pitch\Liform\Transformer\CompoundTransformer;
+use Pitch\Liform\Transformer\NumberTransformer;
+use Pitch\Liform\Resolver;
+use Pitch\Liform\LiformTestCase;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>

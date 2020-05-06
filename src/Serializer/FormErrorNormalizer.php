@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Serializer;
+namespace Pitch\Liform\Serializer;
 
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;

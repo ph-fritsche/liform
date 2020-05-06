@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Transformer;
+namespace Pitch\Liform\Transformer;
 
-use Limenius\Liform\FormUtil;
-use Limenius\Liform\ResolverInterface;
+use Pitch\Liform\FormUtil;
+use Pitch\Liform\ResolverInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeGuesserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

@@ -1,5 +1,5 @@
 {
-    "name": "limenius/liform",
+    "name": "pitch/liform",
     "description": "Library to transform Symfony Forms into Json Schema",
     "type": "library",
     "license": "MIT",
@@ -7,16 +7,20 @@
         {
             "name": "Nacho Martín",
             "email": "nacho@limenius.com"
+        },
+        {
+            "name": "Philipp Fritsche",
+            "email": "ph.fritsche@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Limenius\\Liform\\": "src/"
+            "Pitch\\Liform\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Limenius\\Liform\\": "test/"
+            "Pitch\\Liform\\": "test/"
         }
     },
     "require": {

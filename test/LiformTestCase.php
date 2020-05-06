@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform;
+namespace Pitch\Liform;
 
-use Limenius\Liform\Form\AddLiformExtension;
+use Pitch\Liform\Form\AddLiformExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Forms;

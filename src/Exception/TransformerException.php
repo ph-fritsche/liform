@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Exception;
+namespace Pitch\Liform\Exception;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>

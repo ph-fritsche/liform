@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform;
+namespace Pitch\Liform;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ResolvedFormTypeInterface;

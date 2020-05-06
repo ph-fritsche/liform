@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform;
+namespace Pitch\Liform;
 
-use Limenius\Liform\Resolver;
-use Limenius\Liform\Exception\TransformerException;
-use Limenius\Liform\Transformer\StringTransformer;
+use Pitch\Liform\Resolver;
+use Pitch\Liform\Exception\TransformerException;
+use Pitch\Liform\Transformer\StringTransformer;
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

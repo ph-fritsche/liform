@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Serializer;
+namespace Pitch\Liform\Serializer;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Limenius\Liform\FormUtil;
+use Pitch\Liform\FormUtil;
 
 /**
  * Normalize instances of FormView

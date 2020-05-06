@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform;
+namespace Pitch\Liform;
 
-use Limenius\Liform\Exception\TransformerException;
-use Limenius\Liform\Transformer\TransformerInterface;
+use Pitch\Liform\Exception\TransformerException;
+use Pitch\Liform\Transformer\TransformerInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**

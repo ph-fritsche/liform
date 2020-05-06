@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform;
+namespace Pitch\Liform;
 
-use Limenius\Liform\Transformer\ExtensionInterface;
+use Pitch\Liform\Transformer\ExtensionInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**

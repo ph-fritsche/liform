@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Serializer;
+namespace Pitch\Liform\Serializer;
 
-use Limenius\Liform\LiformTestCase;
+use Pitch\Liform\LiformTestCase;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

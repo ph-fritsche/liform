@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Guesser;
+namespace Pitch\Liform\Guesser;
 
 use Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser;
 use Symfony\Component\Validator\Constraint;

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Transformer;
+namespace Pitch\Liform\Transformer;
 
-use Limenius\Liform\FormUtil;
-use Limenius\Liform\Guesser\ValidatorGuesser;
+use Pitch\Liform\FormUtil;
+use Pitch\Liform\Guesser\ValidatorGuesser;
 use Symfony\Component\Form\FormInterface;
 
 /**

@@ -1,25 +1,37 @@
+---
+
+This is a fork of [Limenius/Liform](https://github.com/Limenius/Liform) trying to improve compatibility with recent packages, conventions and coding standards.
+
+The goal is to push this to a version 1.0 fully tested and in full compatibility with [Symfony 5.1](https://github.com/symfony/symfony).
+
+---
+
 Liform
 ======
 
 Liform is a library for serializing Symfony Forms into [JSON schema](http://json-schema.org/). It can be used along with [liform-react](https://github.com/Limenius/liform-react) or [json-editor](https://github.com/jdorn/json-editor), or any other form generator based on json-schema.
 
+<!--
 It is used by [LiformBundle](https://github.com/Limenius/LiformBundle) but can also be used as a stand-alone library.
+-->
 
 It is very annoying to maintain backend forms that match forms in a client technology, such as JavaScript. It is also annoying to maintain a documentation of such forms. And error prone.
 
 Liform generates a JSON schema representation, that serves as documentation and can be used to document, validate your data and, if you want, to generate forms using a generator.
 
+<!--
 [![Build Status](https://travis-ci.org/Limenius/Liform.svg?branch=master)](https://travis-ci.org/Limenius/Liform)
-[![Latest Stable Version](https://poser.pugx.org/limenius/liform/v/stable)](https://packagist.org/packages/limenius/liform)
-[![Latest Unstable Version](https://poser.pugx.org/limenius/liform/v/unstable)](https://packagist.org/packages/limenius/liform)
-[![License](https://poser.pugx.org/limenius/liform/license)](https://packagist.org/packages/limenius/liform)
+[![Latest Stable Version](https://poser.pugx.org/pitch/liform/v/stable)](https://packagist.org/packages/pitch/liform)
+-->
+[![Latest Unstable Version](https://poser.pugx.org/pitch/liform/v/unstable)](https://packagist.org/packages/pitch/liform)
+[![License](https://poser.pugx.org/pitch/liform/license)](https://packagist.org/packages/pitch/liform)
 
 ## Installation
 
 Open a console, enter your project directory and execute the
 following command to download the latest stable version of this library:
 
-    $ composer require limenius/liform
+    $ composer require pitch/liform
 
 This command requires you to have Composer installed globally, as explained
 in the *installation chapter* of the Composer documentation.
@@ -32,9 +44,9 @@ in the *installation chapter* of the Composer documentation.
 Serializing a form into JSON Schema:
 
 ```php
-use Limenius\Liform\Resolver;
-use Limenius\Liform\Liform;
-use Limenius\Liform\Liform\Transformer;
+use Pitch\Liform\Resolver;
+use Pitch\Liform\Liform;
+use Pitch\Liform\Liform\Transformer;
 
 $resolver = new Resolver();
 $resolver->setTransformer('text', Transformer\StringTransformer);
@@ -106,7 +118,7 @@ To do so, you can use the `setTransformer` method of the `Resolver` class. In th
 
 ```php
 
-use Limenius\Liform\Liform;
+use Pitch\Liform\Liform;
 
 $stringTransformer = $this->get('liform.transformer.string');
 
@@ -120,7 +132,7 @@ $liform = new Liform($resolver);
 This library provides a normalizer to serialize a `FormView` (you can create one with `$form->createView()`) into an array of initial values.
 
 ```php
-use Limenius\Liform\Serializer\FormViewNormalizer;
+use Pitch\Liform\Serializer\FormViewNormalizer;
 
 $encoders = array(new XmlEncoder(), new JsonEncoder());
 $normalizers = array(new FormViewNormalizer());
@@ -138,7 +150,7 @@ To obtain an array of initial values that match your json-schema.
 This library provides a normalizer to serialize forms with errors into an array. This part was shamelessly taken from [FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle/blob/master/Serializer/Normalizer/FormErrorNormalizer.php). To use this feature copy the following code in your controller action:
 
 ```php
-use Limenius\Liform\Serializer\FormErrorNormalizer;
+use Pitch\Liform\Serializer\FormErrorNormalizer;
 
 $encoders = array(new XmlEncoder(), new JsonEncoder());
 $normalizers = array(new FormErrorNormalizer());

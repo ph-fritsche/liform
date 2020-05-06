@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Limenius\Liform\Transformer;
+namespace Pitch\Liform\Transformer;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ChoiceList\View\ChoiceGroupView;
