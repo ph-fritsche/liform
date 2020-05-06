@@ -13,7 +13,7 @@
         "psr-4": { "Pitch\\LiformBundle\\": "src/" }
     },
     "require": {
-        "limenius/liform": "^0.15.0",
+        "pitch/liform": "dev-master",
         "symfony/validator": "*"
     },
     "minimum-stability": "stable"

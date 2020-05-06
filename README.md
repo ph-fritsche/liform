@@ -128,12 +128,12 @@ In the following example we are reusing the StringTransformer class. By specifyi
 services:
     app.liform.file_type.transformer:
         class: "%liform.transformer.string.class%"
-        parent: Limenius\Liform\Transformer\AbstractTransformer
+        parent: Pitch\Liform\Transformer\AbstractTransformer
         tags:
             - { name: liform.transformer, form_type: file, widget: file_widget }
 ```
 
-You can of course use your very own Transformer class, just make sure to implement the required `Limenius\Liform\Transformer\TransformerInterface` when you do.
+You can of course use your very own Transformer class, just make sure to implement the required `Pitch\Liform\Transformer\TransformerInterface` when you do.
 
 ## Extending the default behaviour
 
@@ -143,7 +143,7 @@ In the following example we use an Extension to add a `submit_url` property to t
 ```php
 <?php
 
-use Limenius\Liform\Transformer\ExtensionInterface;
+use Pitch\Liform\Transformer\ExtensionInterface;
 use Symfony\Component\Form\FormInterface;
 
 class FormDataExtension implements ExtensionInterface
@@ -171,7 +171,7 @@ class FormDataExtension implements ExtensionInterface
 }
 ```
 
-Make sure your Extension class implements the required `Limenius\Liform\Transformer\ExtensionInterface`. To register your extension; create a new service definition and add the `liform.extension` tag to it.
+Make sure your Extension class implements the required `Pitch\Liform\Transformer\ExtensionInterface`. To register your extension; create a new service definition and add the `liform.extension` tag to it.
 
 ```yaml
 services:

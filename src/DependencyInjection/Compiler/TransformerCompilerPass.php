@@ -11,7 +11,7 @@
 
 namespace Pitch\LiformBundle\DependencyInjection\Compiler;
 
-use Limenius\Liform\Transformer\TransformerInterface;
+use Pitch\Liform\Transformer\TransformerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
