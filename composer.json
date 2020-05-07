@@ -1,7 +1,7 @@
 {
     "name": "pitch/liform",
-    "description": "Library to transform Symfony Forms into Json Schema",
-    "type": "library",
+    "description": "Transform Symfony Forms into Json Schema",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
