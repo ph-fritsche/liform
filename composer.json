@@ -7,6 +7,10 @@
         {
             "name": "Nacho Martín",
             "email": "nacho@limenius.com"
+        },
+        {
+            "name": "Philipp Fritsche",
+            "email": "ph.fritsche@gmail.com"
         }
     ],
     "autoload": {
