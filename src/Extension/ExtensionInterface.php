@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Pitch\Liform\Transformer;
+namespace Pitch\Liform\Extension;
 
 use Symfony\Component\Form\FormInterface;
 

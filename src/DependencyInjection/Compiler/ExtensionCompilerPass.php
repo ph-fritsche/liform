@@ -12,7 +12,7 @@
 namespace Pitch\Liform\DependencyInjection\Compiler;
 
 use Pitch\Liform\LiformInterface;
-use Pitch\Liform\Transformer\ExtensionInterface;
+use Pitch\Liform\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

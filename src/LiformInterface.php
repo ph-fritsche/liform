@@ -11,7 +11,7 @@
 
 namespace Pitch\Liform;
 
-use Pitch\Liform\Transformer\ExtensionInterface;
+use Pitch\Liform\Extension\ExtensionInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
