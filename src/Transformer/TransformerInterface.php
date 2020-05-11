@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,20 +15,16 @@
 
 namespace Pitch\Liform\Transformer;
 
-use Pitch\Liform\Extension\ExtensionInterface;
-use Symfony\Component\Form\FormInterface;
+use Pitch\Liform\TransformResult;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
 interface TransformerInterface
 {
-    /**
-     * @param FormInterface        $form
-     * @param ExtensionInterface[] $extensions
-     * @param string|null          $widget
-     *
-     * @return array
-     */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null);
+    public function transform(
+        FormView $view
+    ): TransformResult;
 }

@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,10 +17,11 @@ namespace Pitch\Liform;
 
 use Pitch\Liform\Exception\TransformerException;
 use Pitch\Liform\Transformer\TransformerInterface;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
 class Resolver implements ResolverInterface
 {
@@ -25,44 +30,28 @@ class Resolver implements ResolverInterface
      */
     private $transformers = [];
 
-    /**
-     * @param string               $formType
-     * @param TransformerInterface $transformer
-     * @param string|null          $widget
-     */
-    public function setTransformer($formType, TransformerInterface $transformer, $widget = null)
-    {
-        $this->transformers[$formType] = [
-            'transformer' => $transformer,
-            'widget' => $widget,
-        ];
+    public function setTransformer(
+        string $blockPrefix,
+        TransformerInterface $transformer
+    ): void {
+        $this->transformers[$blockPrefix] = $transformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function resolve(FormInterface $form)
-    {
-        $types = FormUtil::typeAncestry($form);
+    public function resolve(
+        FormView $view
+    ): TransformerInterface {
+        $blockPrefixes = $view->vars['block_prefixes'] ?? [];
 
-        foreach ($types as $type) {
-            if (isset($this->transformers[$type])) {
-                return $this->transformers[$type];
+        foreach (array_reverse($blockPrefixes) as $prefix) {
+            if (isset($this->transformers[$prefix])) {
+                return $this->transformers[$prefix];
             }
-        }
-
-        // Perhaps a compound we don't have a specific transformer for
-        if (FormUtil::isCompound($form)) {
-            return [
-                'transformer' => $this->transformers['compound']['transformer'],
-                'widget' => null,
-            ];
         }
 
         throw new TransformerException(
             sprintf(
-                'Could not find a transformer for any of these types (%s)',
-                implode(', ', $types)
+                'Could not find a transformer for any of these block prefixes (%s)',
+                implode(', ', $blockPrefixes)
             )
         );
     }

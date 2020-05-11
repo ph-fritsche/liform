@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,48 +16,44 @@
 namespace Pitch\Liform;
 
 use Pitch\Liform\Extension\ExtensionInterface;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
 class Liform implements LiformInterface
 {
-    /**
-     * @var ResolverInterface
-     */
-    private $resolver;
+    protected ResolverInterface $resolver;
 
     /**
      * @var ExtensionInterface[]
      */
-    private $extensions = [];
+    protected $extensions = [];
 
-    /**
-     * @param ResolverInterface $resolver
-     */
-    public function __construct(ResolverInterface $resolver)
-    {
+    public function __construct(
+        ResolverInterface $resolver
+    ) {
         $this->resolver = $resolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transform(FormInterface $form)
-    {
-        $transformerData = $this->resolver->resolve($form);
+    public function transform(
+        FormView $view
+    ): TransformResult {
+        $transformer = $this->resolver->resolve($view);
 
-        return $transformerData['transformer']->transform($form, $this->extensions, $transformerData['widget']);
+        $result = $transformer->transform($view);
+
+        foreach ($this->extensions as $extension) {
+            $extension->apply($result, $view);
+        }
+
+        return $result;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addExtension(ExtensionInterface $extension)
-    {
+    public function addExtension(
+        ExtensionInterface $extension
+    ) {
         $this->extensions[] = $extension;
-
-        return $this;
     }
 }
