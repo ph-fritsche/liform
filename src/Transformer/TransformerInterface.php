@@ -24,6 +24,10 @@ use Symfony\Component\Form\FormView;
  */
 interface TransformerInterface
 {
+    /**
+     * Extract the (type specific) data from FormViews.
+     * The TransformResult should contain all schema information necessary to generate data that fits the Form.
+     */
     public function transform(
         FormView $view
     ): TransformResult;

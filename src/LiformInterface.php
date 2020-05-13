@@ -24,6 +24,9 @@ use Symfony\Component\Form\FormView;
  */
 interface LiformInterface
 {
+    /**
+     * Transform a FormView into a JSON-Schema compatible object.
+     */
     public function transform(
         FormView $view
     ): TransformResult;

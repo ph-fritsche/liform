@@ -24,6 +24,9 @@ use Symfony\Component\Form\FormView;
  */
 interface ResolverInterface
 {
+    /**
+     * Determine the Transformer that will handle the given FormView.
+     */
     public function resolve(
         FormView $view
     ): TransformerInterface;

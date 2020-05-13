@@ -24,6 +24,10 @@ use Symfony\Component\Form\FormView;
  */
 interface ExtensionInterface
 {
+    /**
+     * Manipulate the TransformResult according to the FormView.
+     * This should add generic information shared across different structures of FormViews.
+     */
     public function apply(
         TransformResult $transformResult,
         FormView $formView

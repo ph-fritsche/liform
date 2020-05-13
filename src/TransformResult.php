@@ -16,8 +16,15 @@ use Swaggest\JsonSchema\Schema;
 
 class TransformResult
 {
+    /**
+     * Schema describing what data should be supplied by and to the Form.
+     * This should also contain every information necessary to render adequate UI.
+     */
     public Schema $schema;
 
+    /**
+     * If initialized, should contain the view data.
+     */
     public $value;
 
     public function __construct(
