@@ -11,6 +11,7 @@
 
 namespace Pitch\Liform\DependencyInjection\Compiler;
 
+use Pitch\Liform\Resolver;
 use Pitch\Liform\ResolverInterface;
 use Pitch\Liform\Transformer\TransformerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -29,11 +30,11 @@ class TransformerCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(ResolverInterface::class)) {
+        if (!$container->hasDefinition(Resolver::class)) {
             return;
         }
 
-        $resolver = $container->getDefinition(ResolverInterface::class);
+        $resolver = $container->getDefinition(Resolver::class);
 
         foreach ($container->findTaggedServiceIds(self::TRANSFORMER_TAG) as $id => $tags) {
             $transformer = $container->getDefinition($id);
@@ -48,18 +49,17 @@ class TransformerCompilerPass implements CompilerPassInterface
             }
 
             foreach ($tags as $tag) {
-                if (!isset($tag['form_type'])) {
+                if (!isset($tag['block'])) {
                     throw new \InvalidArgumentException(sprintf(
-                        "The service %s was tagged as a '%s' but does not specify the mandatory 'form_type' option.",
+                        "The service %s was tagged as a '%s' but does not specify the mandatory 'block' option.",
                         $id,
                         self::TRANSFORMER_TAG
                     ));
                 }
 
                 $resolver->addMethodCall('setTransformer', [
-                    $tag['form_type'],
-                    new Reference($id),
-                    $tag['widget'] ?? null
+                    $tag['block'],
+                    new Reference($id)
                 ]);
             }
         }

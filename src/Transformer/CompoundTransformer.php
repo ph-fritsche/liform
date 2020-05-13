@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,75 +15,50 @@
 
 namespace Pitch\Liform\Transformer;
 
-use Pitch\Liform\FormUtil;
-use Pitch\Liform\ResolverInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormTypeGuesserInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Pitch\Liform\LiformInterface;
+use Pitch\Liform\TransformResult;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class CompoundTransformer extends AbstractTransformer
+class CompoundTransformer implements TransformerInterface
 {
-    /**
-     * @var ResolverInterface
-     */
-    protected $resolver;
+    protected LiformInterface $liform;
 
-    /**
-     * @param TranslatorInterface           $translator
-     * @param FormTypeGuesserInterface|null $validatorGuesser
-     * @param ResolverInterface             $resolver
-     */
     public function __construct(
-        TranslatorInterface $translator,
-        FormTypeGuesserInterface $validatorGuesser = null,
-        ResolverInterface $resolver
+        LiformInterface $liform
     ) {
-        parent::__construct($translator, $validatorGuesser);
-        $this->resolver = $resolver;
+        $this->liform = $liform;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
-    {
-        $data = [];
-        $order = 1;
-        $required = [];
+    public function transform(
+        FormView $view
+    ): TransformResult {
+        $result = new TransformResult();
 
-        foreach ($form->all() as $name => $field) {
-            $transformerData = $this->resolver->resolve($field);
-            $transformedChild = $transformerData['transformer']->transform($field, $extensions, $transformerData['widget']);
-            $transformedChild['propertyOrder'] = $order;
-            $data[$name] = $transformedChild;
-            $order ++;
+        if ($view->vars['compound'] ?? false) {
+            $result->schema->type = 'object';
+            $result->value = [];
 
-            if ($transformerData['transformer']->isRequired($field)) {
-                $required[] = $field->getName();
+            $i = 0;
+            foreach ($view as $id => $child) {
+                $childResult = $this->liform->transform($child);
+
+                if ($child->vars['required'] ?? false) {
+                    $result->schema->required[] = $id;
+                }
+
+                $childResult->schema->propertyOrder = $i++;
+
+                $result->schema->setProperty($id, $childResult->schema);
+                if ($result->hasValue()) {
+                    $result->value[$id] = $childResult->value;
+                }
             }
         }
 
-        $schema = [
-            'title' => $form->getConfig()->getOption('label'),
-            'type' => 'object',
-            'properties' => $data,
-        ];
-
-        if (!empty($required)) {
-            $schema['required'] = $required;
-        }
-
-        $innerType = $form->getConfig()->getType()->getInnerType();
-
-        $schema = $this->addCommonSpecs($form, $schema, $extensions, $widget);
-
-        if (method_exists($innerType, 'buildLiform')) {
-            $schema = $innerType->buildLiform($form, $schema);
-        }
-
-        return $schema;
+        return $result;
     }
 }

@@ -31,6 +31,7 @@ class PitchLiformExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('extensions.yaml');
         $loader->load('transformers.yaml');
         $loader->load('services.yaml');
     }

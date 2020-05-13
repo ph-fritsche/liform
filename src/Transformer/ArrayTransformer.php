@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,72 +16,64 @@
 namespace Pitch\Liform\Transformer;
 
 use Pitch\Liform\Exception\TransformerException;
-use Pitch\Liform\ResolverInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormTypeGuesserInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Pitch\Liform\LiformInterface;
+use Pitch\Liform\TransformResult;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class ArrayTransformer extends AbstractTransformer
+class ArrayTransformer implements TransformerInterface
 {
-    /**
-     * @var ResolverInterface
-     */
-    protected $resolver;
+    protected LiformInterface $liform;
 
-    /**
-     * @param TranslatorInterface           $translator
-     * @param FormTypeGuesserInterface|null $validatorGuesser
-     * @param ResolverInterface             $resolver
-     */
     public function __construct(
-        TranslatorInterface $translator,
-        FormTypeGuesserInterface $validatorGuesser = null,
-        ResolverInterface $resolver
+        LiformInterface $liform
     ) {
-        parent::__construct($translator, $validatorGuesser);
-        $this->resolver = $resolver;
+        $this->liform = $liform;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
-    {
-        $children = [];
+    public function transform(
+        FormView $view
+    ): TransformResult {
+        $result = new TransformResult();
 
-        foreach ($form->all() as $name => $field) {
-            $transformerData = $this->resolver->resolve($field);
-            $transformedChild = $transformerData['transformer']->transform($field, $extensions, $transformerData['widget']);
-            $children[] = $transformedChild;
+        $result->schema->type = 'array';
+        $result->value = [];
 
-            if ($transformerData['transformer']->isRequired($field)) {
-                $required[] = $field->getName();
+        $prototype = isset($view->vars['prototype']) ? $this->liform->transform($view->vars['prototype']) : null;
+
+        $childSchemas = [];
+        $childSchemasSame = true;
+
+        foreach ($view as $i => $child) {
+            $childResult = $this->liform->transform($child);
+
+            $result->value[] = $childResult->value ?? null;
+            $childSchemas[] = $childResult->schema;
+
+            if ($i > 0 && $childResult->schema != $childSchemas[0]) {
+                $childSchemasSame = false;
             }
         }
 
-        if (empty($children)) {
-            $entryType = $form->getConfig()->getAttribute('prototype');
-
-            if (!$entryType) {
-                throw new TransformerException('Liform cannot infer the json-schema representation of a an empty Collection or array-like type without the option "allow_add" (to check the proptotype). Evaluating "'.$form->getName().'"');
+        if (isset($childSchemas[0])) {
+            $result->schema->items = $childSchemasSame ? $childSchemas[0] : $childSchemas;
+            if ($prototype && (!$childSchemasSame || $prototype->schema != $childSchemas[0])) {
+                $result->schema->additionalItems = $prototype->schema;
             }
-
-            $transformerData = $this->resolver->resolve($entryType);
-            $children[] = $transformerData['transformer']->transform($entryType, $extensions, $transformerData['widget']);
-            $children[0]['title'] = 'prototype';
+        } elseif($prototype) {
+            $result->schema->items = $prototype->schema;
         }
 
-        $schema = [
-            'type' => 'array',
-            'title' => $form->getConfig()->getOption('label'),
-            'items' => $children[0],
-        ];
+        if ($prototype) {
+            $result->schema->prototypeValue = $prototype->value;
+        }
 
-        $schema = $this->addCommonSpecs($form, $schema, $extensions, $widget);
+        $result->schema->allowAdd = $view->vars['allow_add'];
+        $result->schema->allowDelete = $view->vars['allow_delete'];
 
-        return $schema;
+        return $result;
     }
 }

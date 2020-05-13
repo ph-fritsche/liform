@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,78 +15,26 @@
 
 namespace Pitch\Liform\Transformer;
 
-use Pitch\Liform\FormUtil;
-use Pitch\Liform\Guesser\ValidatorGuesser;
-use Symfony\Component\Form\FormInterface;
+use Pitch\Liform\TransformResult;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class StringTransformer extends AbstractTransformer
+class StringTransformer implements TransformerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
-    {
-        $schema = ['type' => 'string'];
-        $schema = $this->addCommonSpecs($form, $schema, $extensions, $widget);
-        $schema = $this->addMaxLength($form, $schema);
-        $schema = $this->addMinLength($form, $schema);
+    public function transform(
+        FormView $view
+    ): TransformResult {
+        $result = new TransformResult();
 
-        return $schema;
-    }
+        $result->schema->type = 'string';
 
-    /**
-     * @param FormInterface $form
-     * @param array         $schema
-     *
-     * @return array
-     */
-    protected function addMaxLength(FormInterface $form, array $schema)
-    {
-        if ($attr = $form->getConfig()->getOption('attr')) {
-            if (isset($attr['maxlength'])) {
-                $schema['maxLength'] = $attr['maxlength'];
-            }
-        }
+        $result->schema->maxLength = $view->vars['attr']['maxlength'] ?? null;
+        $result->schema->minLength = $view->vars['attr']['minlength'] ?? null;
+        $result->schema->pattern = $view->vars['attr']['pattern'] ?? null;
 
-        return $schema;
-    }
-
-    /**
-     * @param FormInterface $form
-     * @param array         $schema
-     *
-     * @return array
-     */
-    protected function addMinLength(FormInterface $form, array $schema)
-    {
-        if ($attr = $form->getConfig()->getOption('attr')) {
-            if (isset($attr['minlength'])) {
-                $schema['minLength'] = $attr['minlength'];
-                
-                return $schema;
-            }
-        }
-        
-        if (null === $this->validatorGuesser) {
-            return $schema;
-        }
-
-        $class = FormUtil::findDataClass($form);
-
-        if (null === $class) {
-            return $schema;
-        }
-
-        $minLengthGuess = $this->validatorGuesser->guessMinLength($class, $form->getName());
-        $minLength = $minLengthGuess ? $minLengthGuess->getValue() : null;
-
-        if ($minLength) {
-            $schema['minLength'] = $minLength;
-        }
-
-        return $schema;
+        return $result;
     }
 }

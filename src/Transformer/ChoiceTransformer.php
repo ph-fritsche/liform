@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,82 +15,82 @@
 
 namespace Pitch\Liform\Transformer;
 
-use Symfony\Component\Form\FormInterface;
+use Pitch\Liform\TransformResult;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\ChoiceList\View\ChoiceView;
+use Symfony\Component\Form\ChoiceList\View\ChoiceListView;
 use Symfony\Component\Form\ChoiceList\View\ChoiceGroupView;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class ChoiceTransformer extends AbstractTransformer
+class ChoiceTransformer implements TransformerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function transform(FormInterface $form, array $extensions = [], $widget = null)
-    {
-        $formView = $form->createView();
+    private TranslatorInterface $translator;
+
+    public function __construct(
+        TranslatorInterface $translator
+    ) {
+        $this->translator = $translator;
+    }
+
+    public function transform(
+        FormView $view
+    ): TransformResult {
+        $result = new TransformResult();
 
         $choices = [];
-        $titles = [];
-        foreach ($formView->vars['choices'] as $choiceView) {
-            if ($choiceView instanceof ChoiceGroupView) {
-                foreach ($choiceView->choices as $choiceItem) {
-                    $choices[] = $choiceItem->value;
-                    $titles[] = $this->translator->trans($choiceItem->label);
-                }
-            } else {
-                $choices[] = $choiceView->value;
-                $titles[] = $this->translator->trans($choiceView->label);
+        $choicesTitles = [];
+        foreach ($this->iterateChoices($view->vars['choices']) as $choiceView) {
+            $choices[] = $choiceView->value;
+            $choicesTitles[] = $this->translator->trans($choiceView->label, [], $view->vars['choice_translation_domain'] ?? null);
+        }
+
+        if ($view->vars['multiple'] ?? false) {
+
+            $result->schema->type = 'array';
+
+            $result->schema->items = $result->schema::schema();
+            $result->schema->items->type = 'string';
+            $result->schema->items->enum = $choices;
+            $result->schema->items->enumTitles = $choicesTitles;
+
+            $result->schema->minItems = $view->vars['required'] ?? false ? 1 : 0;
+            $result->schema->uniqueItems = true;
+
+        } else {
+
+            $result->schema->type = 'string';
+
+            $result->schema->enum = $choices;
+            $result->schema->enumTitles = $choicesTitles;
+
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param ChoiceView|ChoiceListView|ChoiceGroupView|iterable $choices
+     */
+    private function iterateChoices(
+        $choices
+    ) {
+        if ($choices instanceof ChoiceView) {
+            yield $choices;
+        } elseif ($choices instanceof ChoiceListView) {
+            foreach ($choices->preferredChoices as $choice) {
+                yield from $this->iterateChoices($choice);
+            }
+            foreach ($choices->choices as $choice) {
+                yield from $this->iterateChoices($choice);
+            }
+        } elseif (is_iterable($choices)) {
+            foreach ($choices as $choice) {
+                yield from $this->iterateChoices($choice);
             }
         }
-
-        if ($formView->vars['multiple']) {
-            $schema = $this->transformMultiple($form, $choices, $titles);
-        } else {
-            $schema = $this->transformSingle($form, $choices, $titles);
-        }
-
-        $schema = $this->addCommonSpecs($form, $schema, $extensions, $widget);
-
-        return $schema;
-    }
-
-    private function transformSingle(FormInterface $form, $choices, $titles)
-    {
-        $formView = $form->createView();
-
-        $schema = [
-            'enum' => $choices,
-            'enum_titles' => $titles,
-            'type' => 'string',
-        ];
-
-        if ($formView->vars['expanded']) {
-            $schema['widget'] = 'choice-expanded';
-        }
-
-        return $schema;
-    }
-
-    private function transformMultiple(FormInterface $form, $choices, $titles)
-    {
-        $formView = $form->createView();
-
-        $schema = [
-            'items' => [
-                'type' => 'string',
-                'enum' => $choices,
-                'enum_titles' => $titles,
-            ],
-            'minItems' => $this->isRequired($form) ? 1 : 0,
-            'uniqueItems' => true,
-            'type' => 'array',
-        ];
-
-        if ($formView->vars['expanded']) {
-            $schema['widget'] = 'choice-multiple-expanded';
-        }
-
-        return $schema;
     }
 }

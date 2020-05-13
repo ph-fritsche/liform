@@ -4,7 +4,9 @@ services:
         autoconfigure: true
 
     Pitch\Liform\ResolverInterface:
-        class: Pitch\Liform\Resolver
+        alias: Pitch\Liform\Resolver
+
+    Pitch\Liform\Resolver:
 
     Pitch\Liform\LiformInterface:
         class: Pitch\Liform\Liform
