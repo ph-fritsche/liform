@@ -21,8 +21,8 @@ class DisabledExtension implements ExtensionInterface
 {
     public function apply(
         TransformResult $transformResult,
-        FormView $formView)
-    {
+        FormView $formView
+    ) {
         if ($formView->vars['disabled'] ?? false) {
             $transformResult->schema->disabled = true;
         }

@@ -30,8 +30,8 @@ class LabelExtension implements ExtensionInterface
 
     public function apply(
         TransformResult $transformResult,
-        FormView $formView)
-    {
+        FormView $formView
+    ) {
         if (isset($formView->vars['label'])) {
             $label = $formView->vars['label'];
         } elseif (isset($formView->vars['label_format'])) {

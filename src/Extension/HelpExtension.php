@@ -30,8 +30,8 @@ class HelpExtension implements ExtensionInterface
 
     public function apply(
         TransformResult $transformResult,
-        FormView $formView)
-    {
+        FormView $formView
+    ) {
         /** @var string */
         $help = $formView->vars['help'] ?? null;
 

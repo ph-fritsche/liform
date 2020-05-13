@@ -21,8 +21,8 @@ class WidgetExtension implements ExtensionInterface
 {
     public function apply(
         TransformResult $transformResult,
-        FormView $formView)
-    {
+        FormView $formView
+    ) {
         if (!isset($transformResult->schema->widget)) {
             $transformResult->schema->widget = array_reverse($formView->vars['block_prefixes']);
         }
