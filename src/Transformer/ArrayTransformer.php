@@ -47,10 +47,13 @@ class ArrayTransformer implements TransformerInterface
         $childSchemas = [];
         $childSchemasSame = true;
 
-        foreach ($view as $i => $child) {
+        foreach ($view as $child) {
+            $i = ($i ?? -1) + 1;
+
             $childResult = $this->liform->transform($child);
 
-            $result->value[] = $childResult->value ?? null;
+            $result->meta->setPropertyMeta($i, $childResult->meta);
+            $result->value[$i] = $childResult->value ?? null;
             $childSchemas[] = $childResult->schema;
 
             if ($i > 0 && $childResult->schema != $childSchemas[0]) {

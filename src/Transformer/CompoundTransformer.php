@@ -53,6 +53,7 @@ class CompoundTransformer implements TransformerInterface
                 $childResult->schema->propertyOrder = $i++;
 
                 $result->schema->setProperty($id, $childResult->schema);
+                $result->meta->setPropertyMeta($id, $childResult->meta);
                 if ($childResult->hasValue()) {
                     $result->value[$id] = $childResult->value;
                 }

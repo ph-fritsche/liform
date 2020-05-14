@@ -12,6 +12,7 @@
 namespace Pitch\Liform;
 
 use ReflectionProperty;
+use Pitch\Liform\Result\Meta;
 use Swaggest\JsonSchema\Schema;
 
 class TransformResult
@@ -23,14 +24,21 @@ class TransformResult
     public Schema $schema;
 
     /**
+     * Attributes to the value like errors, notifications, etc.
+     */
+    public Meta $meta;
+
+    /**
      * If initialized, should contain the view data.
      */
     public $value;
 
     public function __construct(
-        Schema $schema = null
+        Schema $schema = null,
+        Meta $meta = null
     ) {
         $this->schema = $schema ?? new Schema();
+        $this->meta = $meta ?? new Meta();
     }
 
     public function hasValue(): bool
