@@ -28,17 +28,17 @@ class DateTimeTransformer extends CompoundTransformer implements TransformerInte
 
         $result->schema->type = 'string';
 
-        if (\in_array('dateinterval', $view->vars['block_prefix'])) {
+        if (\in_array('dateinterval', $view->vars['block_prefixes'])) {
 
             $result->schema->format = 'duration';
 
-        } elseif (\in_array('date', $view->vars['block_prefix'])) {
+        } elseif (\in_array('date', $view->vars['block_prefixes'])) {
 
             // vars['type'] is 'date' if a html5 date input is expected to be rendered
             // vars['format'] should contain the expected format for view data
             $result->schema->format = $view->vars['type'] ?? $view->vars['format'];
 
-        } elseif (\in_array('time', $view->vars['block_prefix'])) {
+        } elseif (\in_array('time', $view->vars['block_prefixes'])) {
 
             // vars['type'] is 'time' if a html5 time input is expected to be rendered
             if (isset($view->vars['type'])) {
