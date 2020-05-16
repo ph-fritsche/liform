@@ -54,6 +54,7 @@ class ChoiceTransformer implements TransformerInterface
 
             $result->schema->items = $result->schema::schema();
             $result->schema->items->type = 'string';
+
             $result->schema->items->enum = $choices;
             $result->schema->items->enumTitles = $choicesTitles;
 
@@ -63,10 +64,13 @@ class ChoiceTransformer implements TransformerInterface
         } else {
 
             $result->schema->type = 'string';
+            
+        }
 
+        // If empty, the enum property throws validation errors
+        if (count($choices) > 0) {
             $result->schema->enum = $choices;
             $result->schema->enumTitles = $choicesTitles;
-
         }
 
         return $result;
