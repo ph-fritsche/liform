@@ -30,7 +30,7 @@ class DateTimeTransformer extends CompoundTransformer implements TransformerInte
 
         if (\in_array('dateinterval', $view->vars['block_prefixes'])) {
 
-            $result->schema->format = 'duration';
+            $result->schema->pattern = '^(\\+|-)?P(-?\\d+Y)?(-?\\d+M)?(-?\\d+D)?(-?\\d+W)?(T(-?\\d+H)?(-?\\d+M)?(-?\\d+S)?)?$';
 
         } elseif (\in_array('date', $view->vars['block_prefixes'])) {
 
