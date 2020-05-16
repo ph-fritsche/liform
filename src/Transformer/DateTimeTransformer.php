@@ -28,7 +28,11 @@ class DateTimeTransformer extends CompoundTransformer implements TransformerInte
 
         $result->schema->type = 'string';
 
-        if (\in_array('dateinterval', $view->vars['block_prefixes'])) {
+        if (\in_array('week', $view->vars['block_prefixes'])) {
+
+            $result->schema->pattern = '^\d\d\d\d-W([0-4]?\d|5[0-3])$';
+
+        } elseif (\in_array('dateinterval', $view->vars['block_prefixes'])) {
 
             $result->schema->pattern = '^(\\+|-)?P(-?\\d+Y)?(-?\\d+M)?(-?\\d+D)?(-?\\d+W)?(T(-?\\d+H)?(-?\\d+M)?(-?\\d+S)?)?$';
 
