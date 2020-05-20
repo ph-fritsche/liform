@@ -70,7 +70,7 @@ class ArrayTransformer implements TransformerInterface
             $result->schema->items = $prototype->schema;
         }
 
-        if ($prototype) {
+        if ($prototype && $prototype->hasValue()) {
             $result->schema->prototypeValue = $prototype->value;
         }
 
