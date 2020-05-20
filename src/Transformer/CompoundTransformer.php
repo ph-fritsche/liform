@@ -17,6 +17,7 @@ namespace Pitch\Liform\Transformer;
 
 use Pitch\Liform\LiformInterface;
 use Pitch\Liform\TransformResult;
+use stdClass;
 use Symfony\Component\Form\FormView;
 
 /**
@@ -40,7 +41,7 @@ class CompoundTransformer implements TransformerInterface
 
         if ($view->vars['compound'] ?? false) {
             $result->schema->type = 'object';
-            $result->value = [];
+            $result->value = new stdClass();
 
             $i = 0;
             foreach ($view as $id => $child) {
@@ -55,7 +56,7 @@ class CompoundTransformer implements TransformerInterface
                 $result->schema->setProperty($id, $childResult->schema);
                 $result->meta->setPropertyMeta($id, $childResult->meta);
                 if ($childResult->hasValue()) {
-                    $result->value[$id] = $childResult->value;
+                    $result->value->{$id} = $childResult->value;
                 }
             }
         }
