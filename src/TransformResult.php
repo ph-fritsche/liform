@@ -39,6 +39,7 @@ class TransformResult
     ) {
         $this->schema = $schema ?? new Schema();
         $this->meta = $meta ?? new Meta();
+        unset($this->value);
     }
 
     public function hasValue(): bool
