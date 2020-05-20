@@ -29,6 +29,14 @@ class ValueExtension implements ExtensionInterface
 
         if (!empty($formView->vars['value'])) {
             $transformResult->value = $formView->vars['value'];
+
+            if ($transformResult->schema->type === 'boolean') {
+                $transformResult->value = (bool) $transformResult->value;
+            } elseif ($transformResult->schema->type === 'integer') {
+                $transformResult->value = (int) $transformResult->value;
+            } elseif ($transformResult->schema->type === 'number') {
+                $transformResult->value = (float) $transformResult->value;
+            }
         }
     }
 }
