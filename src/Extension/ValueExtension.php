@@ -27,6 +27,8 @@ class ValueExtension implements ExtensionInterface
             return;
         }
 
-        $transformResult->value = $formView->vars['value'];
+        if (!empty($formView->vars['value'])) {
+            $transformResult->value = $formView->vars['value'];
+        }
     }
 }
