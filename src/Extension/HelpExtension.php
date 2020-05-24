@@ -47,6 +47,6 @@ class HelpExtension implements ExtensionInterface
             );
         }
 
-        $transformResult->schema->setTitle($help);
+        $transformResult->schema->setDescription($help);
     }
 }
