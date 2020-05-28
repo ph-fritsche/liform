@@ -21,6 +21,7 @@ use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\ChoiceList\View\ChoiceListView;
 use Symfony\Component\Form\ChoiceList\View\ChoiceGroupView;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Swaggest\JsonSchema\Schema;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
@@ -52,7 +53,7 @@ class ChoiceTransformer implements TransformerInterface
 
             $result->schema->type = 'array';
 
-            $result->schema->items = $result->schema::schema();
+            $result->schema->items = new Schema();
             $result->schema->items->type = 'string';
 
             $result->schema->items->enum = $choices;
@@ -64,15 +65,18 @@ class ChoiceTransformer implements TransformerInterface
         } else {
 
             $result->schema->type = 'string';
+
+            // If empty, the enum property throws validation errors
+            if (count($choices) > 0) {
+                $result->schema->enum = $choices;
+                $result->schema->enumTitles = $choicesTitles;
+            }
+        }
+
+        if ($view->vars['expanded']) {
+            $result->schema->choiceExpanded = true;
+        }
             
-        }
-
-        // If empty, the enum property throws validation errors
-        if (count($choices) > 0) {
-            $result->schema->enum = $choices;
-            $result->schema->enumTitles = $choicesTitles;
-        }
-
         return $result;
     }
 
