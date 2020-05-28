@@ -44,14 +44,7 @@ class DateTimeTransformer extends CompoundTransformer implements TransformerInte
 
         } elseif (\in_array('time', $view->vars['block_prefixes'])) {
 
-            // vars['type'] is 'time' if a html5 time input is expected to be rendered
-            if (isset($view->vars['type'])) {
-                $result->schema->format = $view->vars['type'];
-            } else {
-                $result->schema->format = 'H';
-                $result->schema->format .= ($view->vars['with_minutes'] ?? false) ? ':i' : '';
-                $result->schema->format .= ($view->vars['with_seconds'] ?? false) ? ':s' : '';
-            }
+            $result->schema->pattern = '^([01]?\\d|2[0-4])(:[0-5]?\\d|:){0,2}$';
 
         } else {
 
