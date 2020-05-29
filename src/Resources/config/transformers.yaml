@@ -36,11 +36,11 @@ services:
             - { name: liform.transformer, block: number }
             - { name: liform.transformer, block: integer }
             - { name: liform.transformer, block: range }
+            - { name: liform.transformer, block: money }
+            - { name: liform.transformer, block: percent }
 
     Pitch\Liform\Transformer\StringTransformer:
         tags:
             - { name: liform.transformer, block: text }
             - { name: liform.transformer, block: textarea }
             - { name: liform.transformer, block: color }
-            - { name: liform.transformer, block: money }
-            - { name: liform.transformer, block: percent }
