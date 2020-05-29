@@ -35,6 +35,7 @@ services:
         tags:
             - { name: liform.transformer, block: number }
             - { name: liform.transformer, block: integer }
+            - { name: liform.transformer, block: range }
 
     Pitch\Liform\Transformer\StringTransformer:
         tags:
