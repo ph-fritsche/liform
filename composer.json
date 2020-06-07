@@ -39,11 +39,7 @@
     "scripts": {
         "lint": "phpcs --standard=ruleset.xml src test",
         "lint-fix" : "phpcbf --standard=ruleset.xml src test",
-        "test": [
-            "@test-unit",
-            "@testcov"
-        ],
-        "test-unit": "phpunit --coverage-php coverage/unit.cov",
+        "test": "phpunit",
         "testcov": "phpcov merge --text --html=coverage -- coverage"
     }
 }
