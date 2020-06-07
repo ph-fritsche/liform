@@ -80,20 +80,13 @@ class ChoiceTransformer implements TransformerInterface
     }
 
     /**
-     * @param ChoiceView|ChoiceListView|ChoiceGroupView|iterable $choices
+     * @param ChoiceView|ChoiceGroupView|iterable $choices
      */
     private function iterateChoices(
         $choices
     ) {
         if ($choices instanceof ChoiceView) {
             yield $choices;
-        } elseif ($choices instanceof ChoiceListView) {
-            foreach ($choices->preferredChoices as $choice) {
-                yield from $this->iterateChoices($choice);
-            }
-            foreach ($choices->choices as $choice) {
-                yield from $this->iterateChoices($choice);
-            }
         } elseif (is_iterable($choices)) {
             foreach ($choices as $choice) {
                 yield from $this->iterateChoices($choice);
