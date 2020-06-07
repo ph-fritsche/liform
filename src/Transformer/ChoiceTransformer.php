@@ -29,10 +29,10 @@ use Swaggest\JsonSchema\Schema;
  */
 class ChoiceTransformer implements TransformerInterface
 {
-    private TranslatorInterface $translator;
+    private ?TranslatorInterface $translator;
 
     public function __construct(
-        TranslatorInterface $translator
+        TranslatorInterface $translator = null
     ) {
         $this->translator = $translator;
     }
@@ -46,7 +46,9 @@ class ChoiceTransformer implements TransformerInterface
         $choicesTitles = [];
         foreach ($this->iterateChoices($view->vars['choices']) as $choiceView) {
             $choices[] = $choiceView->value;
-            $choicesTitles[] = $this->translator->trans($choiceView->label, [], $view->vars['choice_translation_domain'] ?? null);
+            $choicesTitles[] = isset($this->translator) ?
+                $this->translator->trans($choiceView->label, [], $view->vars['choice_translation_domain'] ?? null) :
+                $choiceView->label;
         }
 
         if ($view->vars['multiple'] ?? false) {
