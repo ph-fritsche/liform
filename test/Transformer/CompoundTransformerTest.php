@@ -30,7 +30,12 @@ class CompoundTransformerTest extends TransformationTestCase
 {
     public function testObjectWithProperties()
     {
-        $childViews = ['foo' => new FormView(), 'bar' => new FormView()];
+        $childViews = [
+            'foo' => $this->createFormView(FormType::class, [
+                'required' => true,
+            ]),
+            'bar' => new FormView(),
+        ];
         $view = $this->createFormView(FormType::class, [], $childViews);
 
         $liform = $this->createMock(LiformInterface::class);
@@ -61,5 +66,7 @@ class CompoundTransformerTest extends TransformationTestCase
             $this->assertSame($childResults[$childKey]->meta, $result->meta->getPropertyMeta($childKey));
             $this->assertSame($childResults[$childKey]->value, $result->value->{$childKey});
         }
+
+        $this->assertEquals(['foo'], $result->schema->required);
     }
 }
