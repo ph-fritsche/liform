@@ -10,19 +10,3 @@ services:
 
     Pitch\Liform\LiformInterface:
         class: Pitch\Liform\Liform
-
-    Pitch\Liform\Form\AddLiformExtension:
-        tags:
-            - { name: form.type_extension, extended-type: Symfony\Component\Form\Extension\Core\Type\FormType }
-
-    Pitch\Liform\Guesser\ValidatorGuesser:
-        arguments:
-            $metadataFactory: '@validator.mapping.class_metadata_factory'
-
-    Pitch\Liform\Serializer\FormErrorNormalizer:
-        tags:
-            - { name: serializer.normalizer, priority: -10 }
-
-    Pitch\Liform\Serializer\InitialValuesNormalizer:
-        tags:
-            - { name: serializer.normalizer, priority: -10 }
