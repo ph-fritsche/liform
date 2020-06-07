@@ -56,4 +56,35 @@ class ChoiceTransformerTest extends TransformationTestCase
 
         $this->assertEquals(['foo', 'bar'], $result->schema->enumTitles);
     }
+
+    public function testMultiple()
+    {
+        $view = $this->createFormView(ChoiceType::class, [
+            'choices' => ['a' => 'A', 'b' => 'B'],
+            'multiple' => true,
+        ]);
+
+        $transformer = new ChoiceTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertEquals('array', $result->schema->type);
+
+        $this->assertEquals('string', $result->schema->items->type);
+        $this->assertEquals(['A','B'], $result->schema->items->enum);
+        $this->assertEquals(['a','b'], $result->schema->items->enumTitles);
+
+        $this->assertEquals(1, $result->schema->minItems);
+    }
+
+    public function testExpanded()
+    {
+        $view = $this->createFormView(ChoiceType::class, [
+            'expanded' => true,
+        ]);
+
+        $transformer = new ChoiceTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertTrue($result->schema->choiceExpanded);
+    }
 }
