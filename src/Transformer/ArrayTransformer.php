@@ -66,7 +66,7 @@ class ArrayTransformer implements TransformerInterface
             if ($prototype && (!$childSchemasSame || $prototype->schema != $childSchemas[0])) {
                 $result->schema->additionalItems = $prototype->schema;
             }
-        } elseif($prototype) {
+        } elseif ($prototype) {
             $result->schema->items = $prototype->schema;
         }
 

@@ -52,7 +52,6 @@ class ChoiceTransformer implements TransformerInterface
         }
 
         if ($view->vars['multiple'] ?? false) {
-
             $result->schema->type = 'array';
 
             $result->schema->items = new Schema();
@@ -63,9 +62,7 @@ class ChoiceTransformer implements TransformerInterface
 
             $result->schema->minItems = $view->vars['required'] ?? false ? 1 : 0;
             $result->schema->uniqueItems = true;
-
         } else {
-
             $result->schema->type = 'string';
 
             // If empty, the enum property throws validation errors
