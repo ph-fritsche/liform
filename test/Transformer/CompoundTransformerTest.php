@@ -13,12 +13,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Pitch\Liform\Liform\Transformer;
+namespace Pitch\Liform\Transformer;
 
 use Pitch\Liform\LiformInterface;
 use Symfony\Component\Form\FormView;
 use Pitch\Liform\TransformationTestCase;
-use Pitch\Liform\Transformer\CompoundTransformer;
 use Pitch\Liform\TransformResult;
 use stdClass;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

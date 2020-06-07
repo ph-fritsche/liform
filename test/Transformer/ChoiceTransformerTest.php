@@ -13,10 +13,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Pitch\Liform\Liform\Transformer;
+namespace Pitch\Liform\Transformer;
 
 use Pitch\Liform\TransformationTestCase;
-use Pitch\Liform\Transformer\ChoiceTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
