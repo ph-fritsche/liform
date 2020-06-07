@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    bootstrap="./vendor/autoload.php"
+>
 
-<phpunit colors="true" bootstrap="vendor/autoload.php">
-    <testsuites>
-        <testsuite name="Liform Test Suite">
-            <directory suffix="Test.php">./tests/</directory>
-        </testsuite>
-    </testsuites>
+<testsuites>
+    <testsuite name="Full Test">
+        <directory>test</directory>
+    </testsuite>
+</testsuites>
 
-    <filter>
-        <whitelist>
-            <directory>./</directory>
-            <exclude>
-                <directory>./Tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+<filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+        <directory>src</directory>
+    </whitelist>
+</filter>
+
+<logging>
+    <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+</logging>
+
 </phpunit>

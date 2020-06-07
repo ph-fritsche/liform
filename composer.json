@@ -24,27 +24,26 @@
         }
     },
     "require": {
-      "symfony/form": "~2.8|~3.0|^4.0|^5.0",
-      "symfony/translation": "~2.3|~3.0|^4.0|^5.0",
-      "symfony/serializer": "~2.8|~3.0|^4.0|^5.0",
-      "symfony/validator": "~2.8|~3.0|^4.0|^5.0"
+        "symfony/config": "^5",
+        "symfony/dependency-injection": "^5",
+        "symfony/form": "^5",
+        "symfony/http-kernel": "^5",
+        "symfony/translation": "^5",
+        "swaggest/json-schema": "^0.12.29"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^2.5",
-        "escapestudios/symfony2-coding-standard": "^2.9",
-        "wimg/php-compatibility": "^7.0"
+        "squizlabs/php_codesniffer": "^3.2",
+        "phpunit/phpcov": "^7",
+        "phpunit/phpunit": "^9"
     },
     "scripts": {
-        "default-scripts": [
-            "rm -rf vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility; cp -rp vendor/wimg/php-compatibility vendor/squizlabs/php_codesniffer/CodeSniffer/Standards/PHPCompatibility"
+        "lint": "phpcs --standard=ruleset.xml src test",
+        "lint-fix" : "phpcbf --standard=ruleset.xml src test",
+        "test": [
+            "@test-unit",
+            "@testcov"
         ],
-        "post-install-cmd": [
-            "@default-scripts"
-        ],
-        "post-update-cmd": [
-            "@default-scripts"
-        ],
-        "test": "phpunit",
-        "cs": "phpcs --standard=ruleset.xml -p"
+        "test-unit": "phpunit --coverage-php coverage/unit.cov",
+        "testcov": "phpcov merge --text --html=coverage -- coverage"
     }
 }
