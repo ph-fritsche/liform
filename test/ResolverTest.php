@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,42 +15,39 @@
 
 namespace Pitch\Liform;
 
-use Pitch\Liform\Resolver;
+use PHPUnit\Framework\TestCase;
 use Pitch\Liform\Exception\TransformerException;
-use Pitch\Liform\Transformer\StringTransformer;
-use Symfony\Component\Form\Test\TypeTestCase;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Pitch\Liform\Transformer\TransformerInterface;
+use Symfony\Component\Form\FormView;
 
 /**
- * @author Nacho Martín <nacho@limenius.com>
- *
- * @see TypeTestCase
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class ResolverTest extends TypeTestCase
+class ResolverTest extends TestCase
 {
-    public function testConstruct()
-    {
-        $resolver = new Resolver();
-        $this->assertInstanceOf(Resolver::class, $resolver);
-    }
-
-    /**
-     * @expectedException \Limenius\Liform\Exception\TransformerException
-     */
-    public function testCannotResolve()
-    {
-        $resolver = new Resolver();
-        $form = $this->factory->create(TextType::class);
-        $this->assertArrayHasKey('transformer', $resolver->resolve($form));
-    }
-
     public function testResolve()
     {
+        $view = new FormView();
+        $view->vars = ['block_prefixes' => ['foo', 'bar', 'baz']];
+        $transformer = $this->createMock(TransformerInterface::class);
+
         $resolver = new Resolver();
-        $stub = $this->createMock(StringTransformer::class);
-        $resolver->setTransformer('text', $stub);
-        $form = $this->factory->create(TextType::class);
-        $this->assertArrayHasKey('transformer', $resolver->resolve($form));
+        $resolver->setTransformer('foo', clone $transformer);
+        $resolver->setTransformer('bar', $transformer);
+
+        $resolvedTransfomer = $resolver->resolve($view);
+
+        $this->assertSame($transformer, $resolvedTransfomer);
+    }
+
+    public function testException()
+    {
+        $view = new FormView();
+
+        $resolver = new Resolver();
+
+        $this->expectException(TransformerException::class);
+
+        $resolver->resolve($view);
     }
 }

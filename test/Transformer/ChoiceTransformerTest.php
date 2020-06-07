@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,124 +15,46 @@
 
 namespace Pitch\Liform\Liform\Transformer;
 
-use Symfony\Component\Form\Extension\Core\Type;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Pitch\Liform\Transformer\CompoundTransformer;
-use Pitch\Liform\Transformer;
-use Pitch\Liform\Resolver;
-use Pitch\Liform\LiformTestCase;
+use Pitch\Liform\TransformationTestCase;
+use Pitch\Liform\Transformer\ChoiceTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
- *
- * @see TypeTestCase
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class ChoiceTransformerTest extends LiformTestCase
+class ChoiceTransformerTest extends TransformationTestCase
 {
     public function testChoice()
     {
-        $form = $this->factory->create(FormType::class)
-            ->add(
-                'firstName',
-                Type\ChoiceType::class,
-                [
-                    'choices' => ['a' => 'A', 'b' => 'B'],
-                ]
-            );
+        $view = $this->createFormView(ChoiceType::class, [
+            'choices' => ['a' => 'A', 'b' => 'B'],
+        ]);
+        
+        $transformer = new ChoiceTransformer();
+        $result = $transformer->transform($view);
 
-        // 4 times: firstName, form, and the two choices
-        $this->translator->expects($this->exactly(4))
-            ->method('trans')
-            ->will($this->returnCallback(function ($str) {
-                return $str.'-translated';
-            }));
-
-        $resolver = new Resolver();
-        $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
-        $transformer = new CompoundTransformer($this->translator, null, $resolver);
-        $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
-        $this->assertArrayHasKey('enum_titles', $transformed['properties']['firstName']);
-        $this->assertEquals(['a-translated', 'b-translated'], $transformed['properties']['firstName']['enum_titles']);
-        $this->assertArrayHasKey('enum', $transformed['properties']['firstName']);
-        $this->assertEquals(['A', 'B'], $transformed['properties']['firstName']['enum']);
+        $this->assertEquals('string', $result->schema->type);
+        $this->assertEquals(['A','B'], $result->schema->enum);
+        $this->assertEquals(['a','b'], $result->schema->enumTitles);
     }
 
-    public function testChoiceExpanded()
+    public function testTranslateChoiceLabels()
     {
-        $form = $this->factory->create(FormType::class)
-            ->add(
-                'firstName',
-                Type\ChoiceType::class,
-                [
-                    'choices' => ['a' => 'A', 'b' => 'B'],
-                    'expanded' => true,
-                ]
-            );
+        $view = $this->createFormView(ChoiceType::class, [
+            'choices' => ['a' => 'A', 'b' => 'B'],
+        ]);
 
-        // 4 times: firstName, form, and the two choices
-        $this->translator->expects($this->exactly(4))
-            ->method('trans')
-            ->will($this->returnCallback(function ($str) {
-                return $str.'-translated';
-            }));
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translator->expects($this->exactly(2))->method('trans')
+            ->withConsecutive(['a'], ['b'])
+            ->willReturn('foo', 'bar');
+        /** @var TranslatorInterface $translator */
 
-        $resolver = new Resolver();
-        $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
-        $transformer = new CompoundTransformer($this->translator, null, $resolver);
-        $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
-        $this->assertArrayHasKey('enum_titles', $transformed['properties']['firstName']);
-        $this->assertEquals(['a-translated', 'b-translated'], $transformed['properties']['firstName']['enum_titles']);
-        $this->assertArrayHasKey('enum', $transformed['properties']['firstName']);
-        $this->assertEquals(['A', 'B'], $transformed['properties']['firstName']['enum']);
-        $this->assertArrayHasKey('widget', $transformed['properties']['firstName']);
-        $this->assertEquals('choice-expanded',  $transformed['properties']['firstName']['widget']);
-    }
+        $transformer = new ChoiceTransformer($translator);
+        $result = $transformer->transform($view);
 
-    public function testChoiceMultiple()
-    {
-        $form = $this->factory->create(FormType::class)
-            ->add(
-                'firstName',
-                Type\ChoiceType::class,
-                [
-                    'choices' => ['a' => 'A', 'b' => 'B'],
-                    'multiple' => true,
-                ]
-            );
-
-        $resolver = new Resolver();
-        $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
-        $transformer = new CompoundTransformer($this->translator, null, $resolver);
-        $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
-        $this->assertArrayHasKey('items', $transformed['properties']['firstName']);
-        $this->assertEquals('array', $transformed['properties']['firstName']['type']);
-        $this->assertArrayNotHasKey('widget', $transformed['properties']['firstName']);
-    }
-
-    public function testChoiceMultipleExpanded()
-    {
-        $form = $this->factory->create(FormType::class)
-            ->add(
-                'firstName',
-                Type\ChoiceType::class,
-                [
-                    'choices' => ['a' => 'A', 'b' => 'B'],
-                    'expanded' => true,
-                    'multiple' => true,
-                ]
-            );
-
-        $resolver = new Resolver();
-        $resolver->setTransformer('choice', new Transformer\ChoiceTransformer($this->translator, null));
-        $transformer = new CompoundTransformer($this->translator, null, $resolver);
-        $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
-        $this->assertArrayHasKey('items', $transformed['properties']['firstName']);
-        $this->assertEquals('array', $transformed['properties']['firstName']['type']);
-        $this->assertArrayHasKey('widget', $transformed['properties']['firstName']);
-        $this->assertEquals('choice-multiple-expanded',  $transformed['properties']['firstName']['widget']);
+        $this->assertEquals(['foo', 'bar'], $result->schema->enumTitles);
     }
 }

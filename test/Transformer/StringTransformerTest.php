@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,33 +15,35 @@
 
 namespace Pitch\Liform\Liform\Transformer;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Pitch\Liform\Transformer\CompoundTransformer;
+use Pitch\Liform\TransformationTestCase;
 use Pitch\Liform\Transformer\StringTransformer;
-use Pitch\Liform\Resolver;
-use Pitch\Liform\LiformTestCase;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
- *
- * @see TypeTestCase
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class StringTransformerTest extends LiformTestCase
+class StringTransformerTest extends TransformationTestCase
 {
+    public function testString()
+    {
+        $view = $this->createFormView(TextType::class);
+
+        $transformer = new StringTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertEquals('string', $result->schema->type);
+    }
+
     public function testPattern()
     {
-        $form = $this->factory->create(FormType::class)
-            ->add(
-                'firstName',
-                TextType::class,
-                ['attr' => ['pattern' => '.{5,}' ]]
-            );
-        $resolver = new Resolver();
-        $resolver->setTransformer('text', new StringTransformer($this->translator));
-        $transformer = new CompoundTransformer($this->translator, null, $resolver);
-        $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
-        $this->assertEquals('.{5,}', $transformed['properties']['firstName']['pattern']);
+        $view = $this->createFormView(TextType::class, ['attr' => [
+            'pattern' => '.{5,}',
+        ]]);
+
+        $transformer = new StringTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertEquals('.{5,}', $result->schema->pattern);
     }
 }

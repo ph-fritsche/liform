@@ -1,9 +1,13 @@
 <?php
 
 /*
- * This file is part of the Limenius\Liform package.
+ * Original file is part of the Limenius\Liform package.
  *
  * (c) Limenius <https://github.com/Limenius/>
+ *
+ * This file is part of the Pitch\Liform package.
+ *
+ * (c) Philipp Fritsche <ph.fritsche@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,34 +15,51 @@
 
 namespace Pitch\Liform\Liform\Transformer;
 
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Pitch\Liform\Transformer\CompoundTransformer;
+use Pitch\Liform\TransformationTestCase;
 use Pitch\Liform\Transformer\NumberTransformer;
-use Pitch\Liform\Resolver;
-use Pitch\Liform\LiformTestCase;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 /**
- * @author Nacho Martín <nacho@limenius.com>
- *
- * @see TypeTestCase
+ * @author Philipp Fritsche <ph.fritsche@gmail.com>
  */
-class NumberTransformerTest extends LiformTestCase
+class NumberTransformerTest extends TransformationTestCase
 {
-    public function testPattern()
+    public function testInteger()
     {
-        $form = $this->factory->create(FormType::class)
-            ->add(
-                'somefield',
-                NumberType::class,
-                ['liform' => ['widget' => 'widget']]
-            );
-        $resolver = new Resolver();
-        $resolver->setTransformer('number', new NumberTransformer($this->translator));
-        $transformer = new CompoundTransformer($this->translator, null, $resolver);
-        $transformed = $transformer->transform($form);
-        $this->assertTrue(is_array($transformed));
-        $this->assertEquals('number', $transformed['properties']['somefield']['type']);
-        $this->assertEquals('widget', $transformed['properties']['somefield']['widget']);
+        $view = $this->createFormView(IntegerType::class);
+
+        $transformer = new NumberTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertEquals('integer', $result->schema->type);
+    }
+
+    public function testNumber()
+    {
+        $view = $this->createFormView(NumberType::class);
+
+        $transformer = new NumberTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertEquals('number', $result->schema->type);
+    }
+
+    public function testConstraints()
+    {
+        $view = $this->createFormView(NumberType::class, ['attr' => [
+            'min' => 1,
+            'max' => 20,
+            'step' => 5,
+        ]]);
+
+        $transformer = new NumberTransformer();
+        $result = $transformer->transform($view);
+
+        $this->assertEquals(1, $result->schema->minimum);
+        $this->assertEquals(20, $result->schema->maximum);
+
+        // non-standard
+        $this->assertEquals(5, $result->schema->step);
     }
 }
