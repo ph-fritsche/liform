@@ -48,11 +48,9 @@ class Resolver implements ResolverInterface
             }
         }
 
-        throw new TransformerException(
-            sprintf(
-                'Could not find a transformer for any of these block prefixes (%s)',
-                implode(', ', $blockPrefixes)
-            )
-        );
+        throw new TransformerException(sprintf(
+            'Could not find a transformer for any of these block prefixes (%s)',
+            implode(', ', $blockPrefixes)
+        ));
     }
 }
