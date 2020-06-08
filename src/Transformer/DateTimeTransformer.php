@@ -38,12 +38,34 @@ class DateTimeTransformer extends CompoundTransformer implements TransformerInte
         } elseif (\in_array('date', $view->vars['block_prefixes'])) {
             // vars['type'] is 'date' if a html5 date input is expected to be rendered
             // vars['format'] should contain the expected format for view data
-            $result->schema->format = $view->vars['type'] ?? $view->vars['format'];
+            if (isset($view->vars['type'])) {
+                $result->schema->format = $view->vars['type'];
+            } else {
+                $result->schema->pattern = strtr($view->vars['format'] ?? 'Y-m-d', [
+                    'Y' => '(\d{4})',
+                    'y' => '(\d{2}|\d{4})',
+                    'm' => '(0?\d|1[12])',
+                    'd' => '([012]?\d|3[01])',
+                ]);
+            }
         } elseif (\in_array('time', $view->vars['block_prefixes'])) {
             $result->schema->pattern = '^([01]?\\d|2[0-4])(:[0-5]?\\d|:){0,2}$';
         } else {
             // vars['type'] is 'datetime-local' if a html5 time input is expected to be rendered
-            $result->schema->format = isset($view->vars['type']) ? 'date-time': $view->vars['format'] ?? 'y-m-dTH:i:s';
+            if (isset($view->vars['type']) && $view->vars['type'] === 'datetime-local') {
+                $result->schema->format = 'date-time';
+            } else {
+                $result->schema->pattern = strtr($view->vars['format'] ?? 'y-m-dTH:i:s', [
+                    'Y' => '(\d{4})',
+                    'y' => '(\d{2}|\d{4})',
+                    'm' => '(0?\d|1[12])',
+                    'd' => '([012]?\d|3[01])',
+                    'H' => '([01]?\d|2[0-4])',
+                    'h' => '(0?[1-9]|1[012])',
+                    'i' => '([0-5]?\d)',
+                    's' => '([0-5]?\d)',
+                ]);
+            }
         }
 
         return $result;
