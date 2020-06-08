@@ -16,9 +16,9 @@
 namespace Pitch\Liform\Transformer;
 
 use Pitch\Liform\TransformationTestCase;
-use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 
 /**
@@ -76,7 +76,7 @@ class NumberTransformerTest extends TransformationTestCase
 
     public function testCurrencySymbol()
     {
-        $view = $this->createFormView(CurrencyType::class);
+        $view = $this->createFormView(MoneyType::class);
 
         $transformer = new NumberTransformer();
         $result = $transformer->transform($view);
