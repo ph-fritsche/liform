@@ -142,5 +142,4 @@ class DateTimeTransformerTest extends TransformationTestCase
         $this->assertIsString($result->schema->pattern);
         $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-W12'));
     }
-
 }
