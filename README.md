@@ -1,10 +1,4 @@
----
-
-This is a fork of [Limenius/Liform](https://github.com/Limenius/Liform) trying to improve compatibility with recent packages, conventions and coding standards.
-
-The goal is to push this to a version 1.0 fully tested and in full compatibility with [Symfony 5.1](https://github.com/symfony/symfony).
-
----
+[![codecov](https://codecov.io/gh/ph-fritsche/liform/branch/master/graph/badge.svg)](https://codecov.io/gh/ph-fritsche/liform)
 
 # Pitch/Liform
 
