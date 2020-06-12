@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  docs:
+    name: "Update docs"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: composer install
+    - run: php build.php
+    - run: git add -f docs/build
+    - run: >
+        git diff --staged --quiet
+        || git config user.name "${GITHUB_ACTOR}"
+        && git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        && git commit -m "Autoupdate docs"
+        && git push
