@@ -1,51 +1,6 @@
 {
-    "TextareaType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "RangeType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\RangeType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "RadioType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\RadioType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "RepeatedType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "CountryType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "DateIntervalType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateIntervalType",
+    "BirthdayType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType",
         "options": {
             "error_bubbling": false,
             "attr": {
@@ -54,26 +9,16 @@
             "widget": "single_text"
         }
     },
-    "PasswordType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType",
+    "ButtonType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\ButtonType",
         "options": {
-            "error_bubbling": false,
             "attr": {
                 "placeholder": "PlaceholderText"
             }
         }
     },
-    "EmailType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "LanguageType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType",
+    "CheckboxType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType",
         "options": {
             "error_bubbling": false,
             "attr": {
@@ -150,224 +95,6 @@
             "bar"
         ]
     },
-    "SubmitType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType",
-        "options": {
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "ButtonType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\ButtonType",
-        "options": {
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "ColorType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\ColorType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "BirthdayType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\BirthdayType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            },
-            "widget": "single_text"
-        }
-    },
-    "TimezoneType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "TimeType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TimeType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            },
-            "widget": "single_text"
-        }
-    },
-    "UrlType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "IntegerType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\IntegerType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "DateTimeType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateTimeType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            },
-            "widget": "single_text"
-        }
-    },
-    "WeekType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\WeekType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            },
-            "widget": "single_text"
-        }
-    },
-    "LocaleType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\LocaleType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "MoneyType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "DateType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            },
-            "widget": "single_text"
-        }
-    },
-    "CheckboxType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CheckboxType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "FileType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\FileType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "FormType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "PercentType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\PercentType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "NumberType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "CurrencyType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CurrencyType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "HiddenType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\HiddenType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "TelType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TelType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "SearchType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "TextType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType",
-        "options": {
-            "error_bubbling": false,
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
-    "ResetType": {
-        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType",
-        "options": {
-            "attr": {
-                "placeholder": "PlaceholderText"
-            }
-        }
-    },
     "CollectionType_allowAdd": {
         "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType",
         "options": {
@@ -395,5 +122,278 @@
             "foo",
             "bar"
         ]
+    },
+    "ColorType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\ColorType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "CountryType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "CurrencyType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\CurrencyType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "DateIntervalType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateIntervalType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            },
+            "widget": "single_text"
+        }
+    },
+    "DateTimeType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateTimeType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            },
+            "widget": "single_text"
+        }
+    },
+    "DateType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\DateType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            },
+            "widget": "single_text"
+        }
+    },
+    "EmailType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\EmailType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "FileType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\FileType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "FormType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\FormType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "HiddenType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\HiddenType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "IntegerType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\IntegerType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "LanguageType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\LanguageType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "LocaleType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\LocaleType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "MoneyType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\MoneyType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "NumberType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\NumberType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "PasswordType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\PasswordType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "PercentType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\PercentType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "RadioType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\RadioType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "RangeType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\RangeType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "RepeatedType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\RepeatedType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "ResetType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\ResetType",
+        "options": {
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "SearchType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\SearchType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "SubmitType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\SubmitType",
+        "options": {
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "TelType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TelType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "TextType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TextType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "TextareaType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TextareaType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "TimeType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TimeType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            },
+            "widget": "single_text"
+        }
+    },
+    "TimezoneType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\TimezoneType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "UrlType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "WeekType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\WeekType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            },
+            "widget": "single_text"
+        }
     }
 }
