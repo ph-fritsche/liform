@@ -78,15 +78,17 @@ class SymfonyFormType extends FormType
                     $resolveType = $typeObject->getParent();
                 }
                 $definedOptions = $resolver->getDefinedOptions();
-                $defaultOptions = array_filter(
-                    $defaultOptions,
-                    fn($k) => in_array($k, $definedOptions),
-                    ARRAY_FILTER_USE_KEY
-                );
 
                 $config[$subName] = [
                     'class' => $typeClass,
-                    'options' => array_merge($defaultOptions, $typeParams['options'] ?? []),
+                    'options' => array_merge(
+                        array_filter(
+                            $defaultOptions,
+                            fn($k) => in_array($k, $definedOptions),
+                            ARRAY_FILTER_USE_KEY
+                        ),
+                        $typeParams['options'] ?? []
+                    ),
                 ];
 
                 if (\array_key_exists('data', $typeParams ?? [])) {
