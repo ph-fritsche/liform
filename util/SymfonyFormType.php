@@ -42,7 +42,7 @@ class SymfonyFormType extends FormType
         $typeNamespace = $coreExtension->getNamespaceName() . '\\Type\\';
 
         $types = [];
-        foreach ((new Finder())->files()->name("*.php")->in($typeDir) as $typeFile) {
+        foreach ((new Finder())->files()->name("*.php")->in($typeDir)->sortByName(true) as $typeFile) {
             $name = basename($typeFile, '.php');
             $className = $typeNamespace . $name;
             $classRefl = new ReflectionClass($className);
