@@ -49,8 +49,8 @@ class DateTimeTransformerTest extends TransformationTestCase
         $result = $transformer->transform($view);
 
         $this->assertEquals('string', $result->schema->type);
-        $this->assertIsString($result->schema->format);
-        $this->assertEquals('date-time', $result->schema->format);
+        $this->assertIsString($result->schema->pattern);
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10:09'));
     }
 
     public function testDateTimeText()
@@ -67,7 +67,12 @@ class DateTimeTransformerTest extends TransformationTestCase
 
         $this->assertEquals('string', $result->schema->type);
         $this->assertIsString($result->schema->pattern);
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10+02:00'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10:09'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10:09+02:00'));
         $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10:09:08'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '2041-12-11T10:09:08+02:00'));
     }
 
     public function testDate()
@@ -116,7 +121,29 @@ class DateTimeTransformerTest extends TransformationTestCase
 
         $this->assertEquals('string', $result->schema->type);
         $this->assertIsString($result->schema->pattern);
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10:09'));
+    }
+
+    public function testTimeText()
+    {
+        $view = $this->createFormView(TimeType::class, [
+            'widget' => 'single_text',
+            'html5' => false,
+        ]);
+
+        $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
+        $transformer = new DateTimeTransformer($liform);
+        $result = $transformer->transform($view);
+
+        $this->assertEquals('string', $result->schema->type);
+        $this->assertIsString($result->schema->pattern);
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10+02:00'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10:09'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10:09+02:00'));
         $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10:09:08'));
+        $this->assertEquals(1, preg_match('/' . $result->schema->pattern . '/', '10:09:08+02:00'));
     }
 
     public function testDateTimeInterval()
