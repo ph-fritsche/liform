@@ -123,6 +123,7 @@ class ArrayTransformerTest extends TransformationTestCase
 
         $liform = $this->createMock(LiformInterface::class);
         $liform->method('transform')->willReturn(new TransformResult());
+        /** @var LiformInterface $liform */
 
         $transformer = new ArrayTransformer($liform);
         $result = $transformer->transform($view);
@@ -137,6 +138,7 @@ class ArrayTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
 
         $transformer = new ArrayTransformer($liform);
         $result = $transformer->transform($view);

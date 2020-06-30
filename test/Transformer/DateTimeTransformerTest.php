@@ -29,6 +29,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         $liform = $this->createMock(LiformInterface::class);
         $liform->method('transform')
             ->willReturn(new TransformResult());
+        /** @var LiformInterface $liform */
 
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
@@ -43,6 +44,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
@@ -59,6 +61,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
@@ -74,6 +77,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
@@ -90,6 +94,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
@@ -105,6 +110,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
@@ -120,6 +126,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
@@ -135,6 +142,7 @@ class DateTimeTransformerTest extends TransformationTestCase
         ]);
 
         $liform = $this->createMock(LiformInterface::class);
+        /** @var LiformInterface $liform */
         $transformer = new DateTimeTransformer($liform);
         $result = $transformer->transform($view);
 
