@@ -1389,8 +1389,8 @@
             },
             "DateTimeType": {
                 "title": "DateTimeType-translated",
+                "pattern": "^(\\d{2}|\\d{4})-(0[1-9]|1[12])-([012]\\d|3[01])T([01]\\d|2[0-3])(?::([0-5]\\d)(?::([0-5]\\d))?)?(?:(\\+(0[1-9]|1[012]):([0-5]?\\d)))?$",
                 "type": "string",
-                "format": "date-time",
                 "attr": {
                     "placeholder": "PlaceholderText"
                 },
@@ -4187,7 +4187,7 @@
             },
             "TimeType": {
                 "title": "TimeType-translated",
-                "pattern": "^([01]?\\d|2[0-4])(:[0-5]?\\d|:){0,2}$",
+                "pattern": "^([01]\\d|2[0-3])(?::([0-5]\\d)(?::([0-5]\\d))?)?(?:(\\+(0[1-9]|1[012]):([0-5]?\\d)))?$",
                 "type": "string",
                 "attr": {
                     "placeholder": "PlaceholderText"
@@ -5089,7 +5089,7 @@
             },
             "WeekType": {
                 "title": "WeekType-translated",
-                "pattern": "^\\d\\d\\d\\d-W([0-4]?\\d|5[0-3])$",
+                "pattern": "^(\\d{4})-W([0-4]?\\d|5[0-3])$",
                 "type": "string",
                 "attr": {
                     "placeholder": "PlaceholderText"
