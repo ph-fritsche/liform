@@ -1,6 +1,6 @@
 [![codecov](https://codecov.io/gh/ph-fritsche/liform/branch/master/graph/badge.svg)](https://codecov.io/gh/ph-fritsche/liform)
 
-# Pitch/Liform
+# ![Liform](https://ph-fritsche.github.io/liform/assets/liform.png)
 
 Library for transforming [Symfony Form Views](https://symfony.com/doc/current/components/form.html) into JSON.
 
