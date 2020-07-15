@@ -1,0 +1,18 @@
+$color-primary: hsl(126, 48%, 23%);
+$color-secondary: hsl(320, 96%, 59%);
+$color-text: hsl(0,0%, 5%);
+
+$color-primary-hue: hue($color-primary);
+$grey-dk-000: hsl($color-primary-hue, 1%, 58%);
+$grey-dk-100: hsl($color-primary-hue, 5%, 37%);
+$grey-dk-200: hsl($color-primary-hue, 7%, 28%);
+$grey-dk-250: hsl($color-primary-hue, 9%, 19%);
+$grey-dk-300: hsl($color-primary-hue, 6%, 16%);
+
+$grey-lt-000: hsl($color-primary-hue, 33%, 97%);
+$grey-lt-100: hsl($color-primary-hue, 8%, 93%);
+$grey-lt-200: hsl($color-primary-hue, 5%, 93%);
+$grey-lt-300: hsl($color-primary-hue, 13%, 90%);
+
+$link-color: $color-primary;
+$btn-primary-color: $color-primary;
