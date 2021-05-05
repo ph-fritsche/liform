@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: composer install
+    - run: composer lint
+    - run: composer test
+      env:
+        XDEBUG_MODE: coverage
+    - uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage/clover.xml
+
+  docs:
+    if: github.event_name == 'push'
+    needs:
+      - check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: composer install
+    - run: php build.php
+    - run: git add -f docs/build
+    - run: >
+        git diff --staged --quiet
+        || (git config user.name "${GITHUB_ACTOR}"
+        && git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        && git commit -m "docs: autoupdate build"
+        && git push)
+
+  release:
+    if: github.event_name == 'push'
+    needs:
+      - check
+      - docs
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ph-fritsche/action-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
