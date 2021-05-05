@@ -1,4 +1,4 @@
-/.*/
-/vendor
 /coverage
 /docs/build
+/vendor
+/.phpunit.*

@@ -34,13 +34,11 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.2",
-        "phpunit/phpcov": "^7",
         "phpunit/phpunit": "^9"
     },
     "scripts": {
         "lint": "phpcs --standard=ruleset.xml src test",
         "lint-fix" : "phpcbf --standard=ruleset.xml src test",
-        "test": "phpunit",
-        "testcov": "phpcov merge --text --html=coverage -- coverage"
+        "test": "phpunit"
     }
 }
