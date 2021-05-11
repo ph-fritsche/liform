@@ -33,7 +33,11 @@ jobs:
         || (git config user.name "${GITHUB_ACTOR}"
         && git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         && git commit -m "docs: autoupdate build"
-        && git push)
+        && git push
+        && echo "buildCommit=$(git rev-parse HEAD)" >>$GITHUB_ENV)
+
+    outputs:
+      buildCommit: ${{ env.buildCommit }}
 
   release:
     if: github.event_name == 'push'
@@ -43,6 +47,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{ needs.docs.outputs.buildCommit }}
     - uses: ph-fritsche/action-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
