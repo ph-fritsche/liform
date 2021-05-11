@@ -30,8 +30,8 @@ jobs:
     - run: git add -f docs/build
     - run: >
         git diff --staged --quiet
-        || (git config user.name "${GITHUB_ACTOR}"
-        && git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        || (git config user.name "github-actions[bot]"
+        && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         && git commit -m "docs: autoupdate build"
         && git push
         && echo "buildCommit=$(git rev-parse HEAD)" >>$GITHUB_ENV)
