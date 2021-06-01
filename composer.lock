@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed08173996fd6bf32774362e965af16b",
+    "content-hash": "d08228e328cadd08f146008a7301816c",
     "packages": [
         {
             "name": "phplang/scope-exit",
@@ -6265,7 +6265,11 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {
+        "php": ">=7.4"
+    },
+    "platform-dev": {
+        "ext-intl": "*"
+    },
     "plugin-api-version": "2.0.0"
 }

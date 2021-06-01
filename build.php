@@ -3,6 +3,8 @@ namespace Pitch\Liform;
 
 require __DIR__ . '/vendor/autoload.php';
 
+ini_set('intl.default_locale', 'en-US');
+
 use Symfony\Component\Form\Forms;
 
 $formFactory = Forms::createFormFactory();

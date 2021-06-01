@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php">
 
+<php>
+    <ini name="intl.default_locale" value="en-US"/>
+</php>
+
 <testsuites>
     <testsuite name="Full Test">
         <directory>test</directory>
