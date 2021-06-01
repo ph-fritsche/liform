@@ -114,7 +114,7 @@ class PitchLiformBundleTest extends KernelTestCase
 
     private function compareJson(
         $file,
-        $object,
+        $object
     ) {
         $jsonFlags = \JSON_PRETTY_PRINT | \JSON_THROW_ON_ERROR;
         $fileContent = \file_get_contents($file);
