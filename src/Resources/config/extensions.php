@@ -8,6 +8,7 @@ use Pitch\Liform\Extension\DisabledExtension;
 use Pitch\Liform\Extension\ErrorExtension;
 use Pitch\Liform\Extension\HelpExtension;
 use Pitch\Liform\Extension\LabelExtension;
+use Pitch\Liform\Extension\NameExtension;
 use Pitch\Liform\Extension\ValueExtension;
 use Pitch\Liform\Extension\WidgetExtension;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -21,6 +22,7 @@ return static function (ContainerConfigurator $container) {
         ErrorExtension::class,
         HelpExtension::class,
         LabelExtension::class,
+        NameExtension::class,
         ValueExtension::class,
         WidgetExtension::class,
     ] as $e) {

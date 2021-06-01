@@ -33,6 +33,11 @@ class TransformResult
      */
     public $value;
 
+    /**
+     * Should contain the form name as it is used by Symfony's request handling.
+     */
+    public string $name;
+
     public function __construct(
         Schema $schema = null,
         Meta $meta = null
