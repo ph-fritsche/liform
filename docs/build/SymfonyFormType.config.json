@@ -377,8 +377,26 @@
             }
         }
     },
+    "UlidType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\UlidType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
     "UrlType": {
         "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\UrlType",
+        "options": {
+            "error_bubbling": false,
+            "attr": {
+                "placeholder": "PlaceholderText"
+            }
+        }
+    },
+    "UuidType": {
+        "class": "Symfony\\Component\\Form\\Extension\\Core\\Type\\UuidType",
         "options": {
             "error_bubbling": false,
             "attr": {

@@ -13,8 +13,8 @@ namespace Pitch\Liform\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 /**
  * @author Nacho Martín <nacho@limenius.com>
@@ -30,9 +30,11 @@ class PitchLiformExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('extensions.yaml');
-        $loader->load('transformers.yaml');
-        $loader->load('services.yaml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $loader->load('liform.php');
+
+        $loader->load('extensions.php');
+        $loader->load('transformers.php');
     }
 }
