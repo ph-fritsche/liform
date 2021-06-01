@@ -11,6 +11,8 @@
 
 namespace Pitch\Liform;
 
+use Pitch\AdrBundle\DependencyInjection\PitchAdrExtension;
+use Pitch\AdrBundle\PitchAdrBundle;
 use Pitch\Liform\DependencyInjection\Compiler\ExtensionCompilerPass;
 use Pitch\Liform\DependencyInjection\Compiler\TransformerCompilerPass;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -19,7 +21,12 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PitchLiformBundleTest extends KernelTestCase
@@ -37,6 +44,7 @@ class PitchLiformBundleTest extends KernelTestCase
             {
                 return [
                     new FrameworkBundle(),
+                    new PitchAdrBundle(),
                     new PitchLiformBundle(),
                 ];
             }
@@ -45,6 +53,13 @@ class PitchLiformBundleTest extends KernelTestCase
             {
                 $loader->load(function (ContainerBuilder $containerBuilder) {
                     $containerBuilder->setParameter('kernel.secret', 'secret');
+                });
+
+                $loader->load(function (ContainerBuilder $containerBuilder) {
+                    $containerBuilder->prependExtensionConfig(
+                        PitchAdrExtension::ALIAS,
+                        ['defaultResponseHandlers' => false],
+                    );
                 });
 
                 $loader->load(function (ContainerBuilder $containerBuilder) {
@@ -109,5 +124,36 @@ class PitchLiformBundleTest extends KernelTestCase
         $objectNormalized = \json_decode($objectEncoded, true, 512, $jsonFlags);
 
         $this->assertEquals($fileObject, $objectNormalized);
+    }
+
+    public function testLiformResponder()
+    {
+        static::bootKernel();
+
+        /** @var FormFactoryInterface */
+        $formFactory = static::$container->get('form.factory');
+        $form = $formFactory->createNamedBuilder('fooForm', SymfonyFormType::class)->getForm();
+        $form->setData(['TextType' => 'foo']);
+
+        $event = new ViewEvent(
+            static::$kernel,
+            new Request(),
+            HttpKernelInterface::MASTER_REQUEST,
+            $form,
+        );
+
+        /** @var EventDispatcherInterface */
+        $dispatcher = static::$container->get('event_dispatcher');
+        $dispatcher->dispatch($event, KernelEvents::VIEW);
+
+        $this->assertFalse($event->hasResponse());
+        $result = $event->getControllerResult();
+
+        $this->assertArrayHasKey('name', $result);
+        $this->assertSame('fooForm', $result['name']);
+
+        $this->assertArrayHasKey('value', $result);
+        $this->assertObjectHasAttribute('TextType', $result['value']);
+        $this->assertSame('foo', $result['value']->TextType);
     }
 }

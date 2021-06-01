@@ -36,5 +36,7 @@ class PitchLiformExtension extends Extension
 
         $loader->load('extensions.php');
         $loader->load('transformers.php');
+
+        $loader->load('responder.php');
     }
 }
