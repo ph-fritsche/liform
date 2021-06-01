@@ -45,8 +45,8 @@
     },
     "scripts": {
         "build": "php build.php",
-        "lint": "phpcs --standard=ruleset.xml src test",
-        "lint-fix" : "phpcbf --standard=ruleset.xml src test",
+        "lint": "phpcs",
+        "lint-fix" : "phpcbf",
         "test": "phpunit"
     }
 }
