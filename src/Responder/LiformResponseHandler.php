@@ -28,7 +28,7 @@ class LiformResponseHandler implements ResponseHandlerInterface
         /** @var FormInterface */
         $form = $payloadEvent->payload;
 
-        $expectedSubmit = $payloadEvent->request->getMethod() !== 'GET';
+        $expectedSubmit = \in_array($payloadEvent->request->getMethod(), ['PATCH', 'POST', 'PUT', 'DELETE']);
         $payloadEvent->httpStatus ??= $expectedSubmit && (!$form->isSubmitted() || !$form->isValid()) ? 400 : 200;
 
         $view = $form->createView();
