@@ -66,4 +66,22 @@ class ValueExtensionTest extends TransformationTestCase
 
         $this->assertIsFloat($result->value);
     }
+
+    public function testChecked()
+    {
+        $extension = new ValueExtension();
+        $result = new TransformResult();
+        $view = new FormView();
+        $view->vars['value'] = '1';
+        
+        $view->vars['checked'] = false;
+        $extension->apply($result, $view);
+
+        $this->assertFalse($result->hasValue());
+
+        $view->vars['checked'] = true;
+        $extension->apply($result, $view);
+
+        $this->assertTrue($result->hasValue());
+    }
 }

@@ -5142,7 +5142,6 @@
     },
     "meta": null,
     "value": {
-        "CheckboxType": true,
         "ChoiceType_default": "bar",
         "ChoiceType_multiple": [
             "bar",
@@ -5157,7 +5156,6 @@
             "bar"
         ],
         "FormType": {},
-        "RadioType": true,
         "RepeatedType": {}
     },
     "name": "form"
